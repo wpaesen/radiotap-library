@@ -7,7 +7,11 @@ add_library(radiotap SHARED radiotap.c)
 set_target_properties(radiotap PROPERTIES
 		      COMPILE_FLAGS "-Wall -Wextra -Wno-address-of-packed-member")
 
-install(TARGETS radiotap DESTINATION lib)
+add_library(radiotap-static STATIC radiotap.c)
+set_target_properties(radiotap-static PROPERTIES
+		      COMPILE_FLAGS "-Wall -Wextra -Wno-address-of-packed-member")
+
+install(TARGETS radiotap radiotap-static DESTINATION lib)
 install(FILES radiotap.h radiotap_iter.h DESTINATION include)
 
 add_executable(parse parse.c)
